@@ -2,16 +2,11 @@
 # Deploy: commit this repo to GitHub, then in the DO control panel choose
 # "Create App" → pick this repo → DO reads .do/app.yaml automatically.
 # Or with the CLI:  doctl apps create --spec .do/app.yaml
-#
-# Static sites are free on App Platform (up to 3 apps). Egress beyond the
-# 1 GiB/mo allowance bills at $0.02/GiB — covered by your DO credits.
-
 name: in-base
 region: nyc
 
 static_sites:
   - name: site
-    # --- point this at your repo ---
     github:
       repo: sylgeist/inbase
       branch: main
@@ -35,8 +30,7 @@ static_sites:
     # Friendly 404 instead of the default.
     catchall_document: 404.html
 
-    # --- custom domain (optional) ---
     # Uncomment and set once you've added the domain in DO and pointed DNS.
-    # domains:
-    #   - domain: yourdomain.net
-    #     type: PRIMARY
+    domains:
+      - domain: inbase.bsdblog.com
+        type: PRIMARY
