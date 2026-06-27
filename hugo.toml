@@ -1,4 +1,4 @@
-baseURL = "https://inbase.bsdblog.com"
+baseURL = "https://inbase.bsdblog.com/"
 title = "In Base"
 
 [languages.en]
@@ -11,10 +11,10 @@ enableGitInfo = false
 disableKinds = ["taxonomy", "term"]
 
 [params]
-  tagline = "Things FreeBSD's base system can do that you didn't know about."
+  tagline = "Things BSD base systems can do that you didn't know about."
   # Shown in the footer; edit freely.
-  author = "Your Name"
-  description = "A blog series on the surprising depth of the FreeBSD base system — in base, at a known version, with a man page."
+  author = "Scott"
+  description = "A blog series on the surprising depth of BSD base systems — in base, at a known version, with a man page."
 
 [markup]
   [markup.highlight]
