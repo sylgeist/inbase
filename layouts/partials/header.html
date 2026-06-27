@@ -1,0 +1,12 @@
+<header class="masthead">
+  <div class="wrap">
+    <a href="{{ "/" | relURL }}" class="brand">
+      In&nbsp;Base<span class="section">(7)</span>
+    </a>
+    {{ with .Site.Menus.main }}
+    <nav class="nav">
+      {{ range . }}<a href="{{ .URL | relURL }}">{{ .Name }}</a>{{ end }}
+    </nav>
+    {{ end }}
+  </div>
+</header>

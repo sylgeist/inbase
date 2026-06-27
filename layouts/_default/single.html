@@ -1,0 +1,11 @@
+{{ define "main" }}
+<article>
+  <h1>{{ .Title }}</h1>
+  <div class="post-meta">
+    {{ with .Date }}{{ .Format "2006-01-02" }}{{ end }}
+    {{ with .Params.freebsd_version }} &middot; FreeBSD {{ . }}{{ end }}
+    {{ with .ReadingTime }} &middot; {{ . }} min read{{ end }}
+  </div>
+  {{ .Content }}
+</article>
+{{ end }}

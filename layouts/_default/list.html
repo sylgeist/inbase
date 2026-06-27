@@ -1,0 +1,23 @@
+{{ define "main" }}
+  {{ if .IsHome }}
+  <p class="tagline" style="font-size:1.2rem;color:var(--muted);margin-bottom:2.5rem;">
+    {{ .Site.Params.tagline }}
+  </p>
+  {{ else }}
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}{{ . }}{{ end }}
+  {{ end }}
+
+  <ul class="post-list">
+    {{ $pages := where .Site.RegularPages "Section" "posts" }}
+    {{ range $pages.ByDate.Reverse }}
+    <li>
+      <span class="date">
+        {{ .Date.Format "2006-01-02" }}{{ with .Params.freebsd_version }} &middot; FreeBSD {{ . }}{{ end }}
+      </span>
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      {{ with .Params.summary }}<p class="summary">{{ . }}</p>{{ else }}<p class="summary">{{ .Summary }}</p>{{ end }}
+    </li>
+    {{ end }}
+  </ul>
+{{ end }}

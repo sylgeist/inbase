@@ -1,0 +1,303 @@
+/* ===========================================================================
+   In Base — stylesheet
+   Design direction: the FreeBSD man page as visual ancestor. Monospace
+   masthead echoing a SECTION(n) header; quiet body set for long-form reading;
+   code blocks treated as the centerpiece since they carry every post.
+   =========================================================================== */
+
+:root {
+  /* Palette — 5 named values, anchored on FreeBSD red, kept restrained. */
+  --ink:        #1a1a1a;   /* body text */
+  --paper:      #fdfcfa;   /* page background, faint warm white */
+  --rule:       #d8d4cc;   /* hairline rules, borders */
+  --muted:      #6b675f;   /* captions, metadata, secondary text */
+  --beastie:    #ab2b28;   /* FreeBSD red — the one accent, used sparingly */
+
+  /* Code surface — slightly cooler than paper so blocks read as distinct. */
+  --code-bg:    #1d2127;
+  --code-fg:    #d6d9de;
+
+  --measure:    68ch;      /* reading width for prose */
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Menlo", "Consolas", monospace;
+  --serif: "Iowan Old Style", "Charter", "Georgia", "Times New Roman", serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink:    #e7e4de;
+    --paper:  #16181c;
+    --rule:   #2e3138;
+    --muted:  #9a958c;
+    --beastie:#e06360;
+    --code-bg:#0f1115;
+    --code-fg:#d6d9de;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  font-feature-settings: "kern", "liga";
+  text-rendering: optimizeLegibility;
+}
+
+/* --- Layout shell --------------------------------------------------------- */
+
+.wrap {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* --- Masthead: the man-page header conceit --------------------------------- */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 2.5rem;
+}
+.masthead .wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.masthead a { text-decoration: none; color: inherit; }
+
+/* Title set like INBASE(7) — monospace, tracked out, the section in red. */
+.brand {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.brand .section { color: var(--beastie); }
+
+.nav {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.nav a { color: var(--muted); text-decoration: none; margin-left: 1.25rem; }
+.nav a:hover { color: var(--beastie); }
+
+/* --- Prose ---------------------------------------------------------------- */
+
+main { padding-bottom: 4rem; }
+
+article h1, article h2, article h3 {
+  font-family: var(--serif);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+article h1 { font-size: 2.1rem; margin: 0 0 0.5rem; }
+article h2 {
+  font-size: 1.5rem;
+  margin: 2.75rem 0 0.75rem;
+  padding-top: 0.5rem;
+}
+article h3 { font-size: 1.2rem; margin: 2rem 0 0.5rem; }
+
+article p, article ul, article ol { margin: 0 0 1.25rem; }
+article ul, article ol { padding-left: 1.4rem; }
+article li { margin: 0.3rem 0; }
+
+a {
+  color: var(--beastie);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+/* Inline code — distinct from prose without shouting. */
+:not(pre) > code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: color-mix(in srgb, var(--beastie) 8%, transparent);
+  color: inherit;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+/* Code blocks — the centerpiece. Full-bleed-ish on narrow screens. */
+.highlight, pre {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0 0 1.5rem;
+}
+.highlight pre, pre {
+  margin: 0;
+  padding: 1rem 1.15rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  background: transparent;
+}
+.highlight { padding: 0; }
+
+blockquote {
+  margin: 0 0 1.25rem;
+  padding: 0.25rem 0 0.25rem 1.1rem;
+  border-left: 3px solid var(--rule);
+  color: var(--muted);
+  font-style: italic;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 2.5rem 0;
+}
+
+/* --- Post meta + list ----------------------------------------------------- */
+
+.post-meta {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.post-list { list-style: none; padding: 0; margin: 0; }
+.post-list li {
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.post-list h2 { font-size: 1.4rem; margin: 0 0 0.3rem; }
+.post-list h2 a { color: var(--ink); text-decoration: none; }
+.post-list h2 a:hover { color: var(--beastie); }
+.post-list .summary { color: var(--muted); font-size: 1rem; margin: 0.3rem 0 0; }
+.post-list .date {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* --- Footer --------------------------------------------------------------- */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 3rem;
+  padding: 1.75rem 0;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+.site-footer a { color: var(--muted); }
+.site-footer a:hover { color: var(--beastie); }
+
+/* --- Accessibility floor -------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--beastie);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 1.05rem; }
+  article h1 { font-size: 1.7rem; }
+  .highlight pre, pre { font-size: 0.76rem; }
+}
+
+/* === Chroma syntax highlighting (nord-derived, bg stripped to use --code-bg) === */
+[95mRunning Hugo 0.163.3 via hugo-python-distributions at /usr/local/lib/python3.12/dist-packages/hugo/binaries/hugo[0m
+/* Generated using: hugo gen chromastyles --style=nord */
+
+/* Error */ .chroma .err { color:#bf616a }
+/* LineLink */ .chroma .lnlinks { outline:none;text-decoration:none;color:inherit }
+/* LineTableTD */ .chroma .lntd { vertical-align:top;padding:0;margin:0;border:0; }
+/* LineTable */ .chroma .lntable { border-spacing:0;padding:0;margin:0;border:0; }
+/* LineHighlight */ .chroma .hl { background-color:#424853 }
+/* LineNumbersTable */ .chroma .lnt { white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74 }
+/* LineNumbers */ .chroma .ln { white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6c6f74 }
+/* Line */ .chroma .line { display:flex; }
+/* Keyword */ .chroma .k { color:#81a1c1;font-weight:bold }
+/* KeywordConstant */ .chroma .kc { color:#81a1c1;font-weight:bold }
+/* KeywordDeclaration */ .chroma .kd { color:#81a1c1;font-weight:bold }
+/* KeywordNamespace */ .chroma .kn { color:#81a1c1;font-weight:bold }
+/* KeywordPseudo */ .chroma .kp { color:#81a1c1 }
+/* KeywordReserved */ .chroma .kr { color:#81a1c1;font-weight:bold }
+/* KeywordType */ .chroma .kt { color:#81a1c1 }
+/* NameAttribute */ .chroma .na { color:#8fbcbb }
+/* NameClass */ .chroma .nc { color:#8fbcbb }
+/* NameConstant */ .chroma .no { color:#8fbcbb }
+/* NameDecorator */ .chroma .nd { color:#d08770 }
+/* NameEntity */ .chroma .ni { color:#d08770 }
+/* NameException */ .chroma .ne { color:#bf616a }
+/* NameLabel */ .chroma .nl { color:#8fbcbb }
+/* NameNamespace */ .chroma .nn { color:#8fbcbb }
+/* NameOther */ .chroma .nx { color:#d8dee9 }
+/* NameProperty */ .chroma .py { color:#8fbcbb }
+/* NameTag */ .chroma .nt { color:#81a1c1 }
+/* NameBuiltin */ .chroma .nb { color:#81a1c1 }
+/* NameBuiltinPseudo */ .chroma .bp { color:#81a1c1 }
+/* NameFunction */ .chroma .nf { color:#88c0d0 }
+/* NameFunctionMagic */ .chroma .fm { color:#88c0d0 }
+/* LiteralString */ .chroma .s { color:#a3be8c }
+/* LiteralStringAffix */ .chroma .sa { color:#a3be8c }
+/* LiteralStringBacktick */ .chroma .sb { color:#a3be8c }
+/* LiteralStringChar */ .chroma .sc { color:#a3be8c }
+/* LiteralStringDelimiter */ .chroma .dl { color:#a3be8c }
+/* LiteralStringDoc */ .chroma .sd { color:#616e87 }
+/* LiteralStringDouble */ .chroma .s2 { color:#a3be8c }
+/* LiteralStringEscape */ .chroma .se { color:#ebcb8b }
+/* LiteralStringHeredoc */ .chroma .sh { color:#a3be8c }
+/* LiteralStringInterpol */ .chroma .si { color:#a3be8c }
+/* LiteralStringOther */ .chroma .sx { color:#a3be8c }
+/* LiteralStringRegex */ .chroma .sr { color:#ebcb8b }
+/* LiteralStringSingle */ .chroma .s1 { color:#a3be8c }
+/* LiteralStringSymbol */ .chroma .ss { color:#a3be8c }
+/* LiteralNumber */ .chroma .m { color:#b48ead }
+/* LiteralNumberBin */ .chroma .mb { color:#b48ead }
+/* LiteralNumberFloat */ .chroma .mf { color:#b48ead }
+/* LiteralNumberHex */ .chroma .mh { color:#b48ead }
+/* LiteralNumberInteger */ .chroma .mi { color:#b48ead }
+/* LiteralNumberIntegerLong */ .chroma .il { color:#b48ead }
+/* LiteralNumberOct */ .chroma .mo { color:#b48ead }
+/* Operator */ .chroma .o { color:#81a1c1 }
+/* OperatorWord */ .chroma .ow { color:#81a1c1;font-weight:bold }
+/* OperatorReserved */ .chroma .or { color:#81a1c1 }
+/* Punctuation */ .chroma .p { color:#eceff4 }
+/* Comment */ .chroma .c { color:#616e87;font-style:italic }
+/* CommentHashbang */ .chroma .ch { color:#616e87;font-style:italic }
+/* CommentMultiline */ .chroma .cm { color:#616e87;font-style:italic }
+/* CommentSingle */ .chroma .c1 { color:#616e87;font-style:italic }
+/* CommentSpecial */ .chroma .cs { color:#616e87;font-style:italic }
+/* CommentPreproc */ .chroma .cp { color:#5e81ac;font-style:italic }
+/* CommentPreprocFile */ .chroma .cpf { color:#5e81ac;font-style:italic }
+/* GenericDeleted */ .chroma .gd { color:#bf616a }
+/* GenericEmph */ .chroma .ge { font-style:italic }
+/* GenericError */ .chroma .gr { color:#bf616a }
+/* GenericHeading */ .chroma .gh { color:#88c0d0;font-weight:bold }
+/* GenericInserted */ .chroma .gi { color:#a3be8c }
+/* GenericOutput */ .chroma .go { color:#d8dee9 }
+/* GenericPrompt */ .chroma .gp { color:#4c566a;font-weight:bold }
+/* GenericStrong */ .chroma .gs { font-weight:bold }
+/* GenericSubheading */ .chroma .gu { color:#88c0d0;font-weight:bold }
+/* GenericTraceback */ .chroma .gt { color:#bf616a }
+/* TextWhitespace */ .chroma .w { color:#d8dee9 }

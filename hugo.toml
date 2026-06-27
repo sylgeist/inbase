@@ -1,0 +1,37 @@
+baseURL = "https://example.com/"
+title = "In Base"
+
+[languages.en]
+  locale = "en-us"
+  label = "English"
+  weight = 1
+enableGitInfo = false
+
+# Generate a clean RSS + sitemap; no taxonomies we don't use.
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  tagline = "Things FreeBSD's base system can do that you didn't know about."
+  # Shown in the footer; edit freely.
+  author = "Your Name"
+  description = "A blog series on the surprising depth of the FreeBSD base system — in base, at a known version, with a man page."
+
+[markup]
+  [markup.highlight]
+    # Chroma renders highlighting at build time — no client-side JS needed.
+    noClasses = false      # emit CSS classes so our stylesheet controls colors
+    lineNos = false        # set true per-block with {linenos=true} if wanted
+    tabWidth = 4
+    guessSyntax = false
+  [markup.goldmark.renderer]
+    unsafe = false         # we don't hand-author raw HTML in posts
+
+[menus]
+  [[menus.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 10
+  [[menus.main]]
+    name = "About"
+    url = "/about/"
+    weight = 20
