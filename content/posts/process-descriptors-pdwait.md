@@ -1,6 +1,6 @@
 +++
 title = "The Process-as-a-File-Descriptor Idea Finally Got Its Missing Piece"
-date = 2026-06-27
+date = 2026-06-22
 draft = false
 summary = "Process descriptors have been in FreeBSD base since 9.0, but until 15.1 you couldn't reap exit status by descriptor. pdwait closes the loop."
 freebsd_version = "15.1"
