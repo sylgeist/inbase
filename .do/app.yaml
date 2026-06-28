@@ -33,3 +33,4 @@ static_sites:
     domains:
       - domain: inbase.bsdblog.com
         type: PRIMARY
+        zone: bsdblog.com
